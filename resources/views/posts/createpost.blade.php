@@ -7,8 +7,24 @@
      @csrf
 
      <div class="form-group row">
-        <div class="col-md-6">
+        <div class="col-md-6 mt-3">
             <p class="border-bottom">Create a post</p>
+        </div>
+     </div>
+
+     <div class="form-group row">
+        <div class="col-md-6">
+            <select class="form-select" id="inputGroupSelect" name="sub_reddit_id">
+                <option selected value="">Choose a Community</option>
+                
+                <option value="">u/{{$user->name}}</option>
+                
+                @foreach ($user->joinedSubreddits as $subReddit)
+                    <option value="{{$subReddit->id}}">r/{{$subReddit->name}}</option>
+                @endforeach
+              
+            </select>
+
         </div>
      </div>
 

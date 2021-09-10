@@ -14,7 +14,11 @@ class PostsController extends Controller
 
     public function create()
     {
-        return view("posts/createpost");
+        $user=auth()->user();
+
+        return view("posts/createpost",[
+            'user'=>$user,
+        ]);
     }
 
     public function store()
@@ -22,16 +26,18 @@ class PostsController extends Controller
         $data=request()->validate([
             'title'=>'required',
             'description'=>'',
+            'sub_reddit_id'=>'',
             'image'=>'image'
         ]);
         if(request('image')!=null)
             $imagePath=request('image')->store('uploads','public');
         else
             $imagePath=null;        
-        
+        //dd($data);
         auth()->user()->posts()->create([
             'title'=>$data['title'],
             'description'=>$data['description'],
+            'sub_reddit_id'=>$data['sub_reddit_id'],
             'image'=>$imagePath,
         ]);
 

@@ -16,9 +16,10 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("user_id");
+            $table->unsignedBigInteger("sub_reddit_id")->nullable();
             $table->string("title");
-            $table->text("description")->nullable();;
-            $table->string("image")->nullable();;
+            $table->text("description")->nullable();
+            $table->string("image")->nullable();
             $table->timestamps();
 
             $table->index("user_id");

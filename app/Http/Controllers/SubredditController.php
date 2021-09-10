@@ -5,21 +5,26 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use App\Models\SubReddit;
+use App\Models\Post;
 
 
 class SubredditController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     public function show($name)
     {
-        $subreddit=SubReddit::where("name",'=', $name )->firstOrFail();
+        $subReddit=SubReddit::where("name",'=', $name )->firstOrFail();
+
+        $posts=Post::where('sub_reddit_id','=',$subReddit->id)->get();
+
+        //dd($posts);
+
+        $isJoined=(auth()->user()) ? auth()->user()->joinedSubreddits->contains($subReddit->id) : false;
 
         return view("subreddits\showsubreddit",[
-            'subreddit'=>$subreddit,
+            'subreddit'=>$subReddit,
+            'isJoined'=>$isJoined,
+            'posts'=>$posts,
         ]);
     }
 

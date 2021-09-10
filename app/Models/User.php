@@ -54,6 +54,6 @@ class User extends Authenticatable
 
     public function joinedSubreddits()
     {
-        return $this->belongToMany(SubReddit::class);
+        return $this->belongsToMany(SubReddit::class);
     }
 }

@@ -21,11 +21,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::post('/join/{subReddit}',[App\Http\Controllers\JoinsController::class, 'store']);
+
 Route::post('/post',[App\Http\Controllers\PostsController::class, 'store']);
 Route::get('/post/create',[App\Http\Controllers\PostsController::class, 'create']);
 
 Route::post('/subreddit',[App\Http\Controllers\SubredditController::class, 'store']);
-Route::get('/r/{name}',[App\Http\Controllers\SubredditController::class, 'show']);
+Route::get('/r/{name}',[App\Http\Controllers\SubredditController::class, 'show'])->name('reddit.show');
 Route::get('/subreddit/create',[App\Http\Controllers\SubredditController::class, 'create']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

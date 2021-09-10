@@ -11,6 +11,8 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://kit.fontawesome.com/14d907c01a.js" crossorigin="anonymous"></script>
+
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -32,7 +34,22 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        @guest
+                            
+                        @else
+                        <div class="dropdown show">
+                            <a class="btn  dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Your Communities
+                            </a>
+                          
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                              @foreach (auth()->user()->joinedSubreddits as $subReddit)
+                                <a class="dropdown-item" href="{{route('reddit.show',['name' => $subReddit->name ])}}"> {{$subReddit->name}} </a>
+                              @endforeach
+                            </div>
+                          </div>
+                          @endguest
+ 
                     </ul>
 
                     <!-- Right Side Of Navbar -->

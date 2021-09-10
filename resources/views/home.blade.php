@@ -11,9 +11,9 @@
     
     <div class="d-flex pt-4">
         <div>
-            <button class="btn btn-primary">upvote</button>
-            <p class="align-text-bottom">15k</p>
-            <button class="btn btn-primary">downvote</button>
+            <button class="btn"> <i class="fas fa-arrow-up"></i></button>
+            <p class="align-text-bottom mb-0" style="text-align: center;">15k</p>
+            <button class="btn"><i class="fas fa-arrow-down"></i></button>
         </div>
         <div id="post_title">
             <img class="rounded-circle pr-2" style="height: 25px;" src="https://i.redd.it/9n242vp9u7r31.png">
@@ -28,9 +28,9 @@
 
     <div class="d-flex pt-4">
         <div>
-            <button class="btn btn-primary">upvote</button>
-            <p class="align-text-bottom">9k</p>
-            <button class="btn btn-primary">downvote</button>
+            <button class="btn"> <i class="fas fa-arrow-up"></i></button>
+            <p class="align-text-bottom mb-0" style="text-align: center;">15k</p>
+            <button class="btn"><i class="fas fa-arrow-down"></i></button>
         </div>
         <div id="post_title">
             <img class="rounded-circle pr-2" style="height: 25px;" src="https://i.redd.it/9n242vp9u7r31.png">
@@ -46,23 +46,31 @@
 
     <div class="d-flex pt-4">
         <div>
-            <button class="btn btn-primary">upvote</button>
-            <p class="align-text-bottom">9k</p>
-            <button class="btn btn-primary">downvote</button>
+            <button class="btn mr-2"> <i class="fas fa-arrow-up"></i></button>
+            <p class="align-text-bottom mb-0 mr-2" style="text-align: center;">15k</p>
+            <button class="btn mr-2"><i class="fas fa-arrow-down"></i></button>
         </div>
         <div id="post_title">
             <img class="rounded-circle pr-2" style="height: 25px;" src="https://i.redd.it/9n242vp9u7r31.png">
-            <h1 style="font-size:small" class="text-bold pt-1 d-inline">r/hollowknight</h1>
-            <p class="pl-2 d-inline">posted by u/{{$user->name}} 21 hours ago </p>
+            <h1 style="font-size:small" class="text-bold pt-1 d-inline">
+                @if(App\Models\SubReddit::where("id","=",$post->sub_reddit_id)->first()==null)
+                    u/{{$user->name}}
+                @else
+                    r/{{App\Models\SubReddit::where("id","=",$post->sub_reddit_id)->first()->name}}
+                @endif
+            </h1>
+            
+            <p class="d-inline">posted by u/{{$user->name}} {{ $post->created_at->diffForHumans()}} </p>
             <div>
                 <h1 class="medium-text">{{ $post->title }}</h1>
             </div>
-            <img class="w-100" src="storage/{{ $post->image }}" style="max-height: 700px">
+            @if( $post->image !=null)
+                <img class="w-100" src="{{ Storage::url($post->image) }}" style="max-height: 700px">
+            @endif
         </div>
     </div>
 
     @endforeach
-    
-    <svg style="max-height: 72px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="_30bZQzX8IR92H3gw3vlaLF"><path d="M16.5,2.924,11.264,15.551H9.91L15.461,2.139h.074a9.721,9.721,0,1,0,.967.785ZM8.475,8.435a1.635,1.635,0,0,0-.233.868v4.2H6.629V6.2H8.174v.93h.041a2.927,2.927,0,0,1,1.008-.745,3.384,3.384,0,0,1,1.453-.294,3.244,3.244,0,0,1,.7.068,1.931,1.931,0,0,1,.458.151l-.656,1.558a2.174,2.174,0,0,0-1.067-.246,2.159,2.159,0,0,0-.981.215A1.59,1.59,0,0,0,8.475,8.435Z"></path></svg>
+
 </div>
 @endsection

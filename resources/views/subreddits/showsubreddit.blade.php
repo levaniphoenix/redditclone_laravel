@@ -16,7 +16,7 @@
                     <h2 class="pl-2" style="font-size: 14px; color:#7c7c7c; margin-top: -5px;"> r/{{$subreddit->name}}</h2>
                 </div>
                 <div>
-                    <button style="margin-top: 24px; width:100px; font-weight: 700; letter-spacing: unset;" class="ml-4 btn btn-primary rounded-pill"> Join</button>
+                    <join-button subreddit-id="{{$subreddit->id}}" is-joined="{{$isJoined}}"></join-button>
                 </div>
             </div>
         </div>
@@ -25,6 +25,32 @@
             <img class="rounded-circle pr-2" style="height: 50px;" src="https://i.redd.it/9n242vp9u7r31.png">
             <a href="/post/create"> <input type="text" placeholder="Create Post" ></a>
         </div>
+
+        @foreach($posts as $post)
+            
+        <div class="d-flex pt-4 container">
+            <div>
+                <button class="btn mr-2"> <i class="fas fa-arrow-up"></i></button>
+                <p class="align-text-bottom mb-0 mr-2" style="text-align: center;">15k</p>
+                <button class="btn mr-2"><i class="fas fa-arrow-down"></i></button>
+            </div>
+            <div id="post_title">
+                <img class="rounded-circle pr-2" style="height: 25px;" src="https://i.redd.it/9n242vp9u7r31.png">
+                @php
+                    $user=APP\Models\User::find($post->user_id);   
+                @endphp
+                <p class=" d-inline">posted by u/{{$user->name}} {{$post->created_at->diffForHumans()}} </p>
+                <div>
+                    <h1 class="medium-text"> {{$post->title}} </h1>
+                </div>
+                @if($post->image !=null)
+                    <img class="w-100" src="{{ Storage::url($post->image) }}" style="max-height: 700px">
+                @endif
+            </div>
+        </div>
+
+        @endforeach
+        
     </div>
 
 @endsection

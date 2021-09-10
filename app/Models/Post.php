@@ -13,6 +13,7 @@ class Post extends Model
         'title',
         'description',
         'image',
+        'sub_reddit_id',
     ];
 
     public function user()
