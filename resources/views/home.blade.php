@@ -57,7 +57,7 @@
                         else if($vote->downvote==true)
                             $isDownvoted=true;
                 @endphp
-                <vote-buttons post-id="{{$post->id}}" is-upvoted="{{$isUpvoted}}" is-downvoted="{{$isDownvoted}}"></vote-buttons>
+                <vote-buttons post-id="{{$post->id}}" is-upvoted="{{$isUpvoted}}" is-downvoted="{{$isDownvoted}}" rating={{$post->rating}}></vote-buttons>
             @endguest
             
         </div>

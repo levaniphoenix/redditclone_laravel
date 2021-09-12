@@ -31,15 +31,19 @@
         <div class="d-flex pt-4 container">
             <div>
                 @guest
-                    <vote-buttons post-id="{{$post->id}}" is-upvoted=""></vote-buttons>
+                    <vote-buttons post-id="{{$post->id}}" is-upvoted="" rating={{$post->rating}}></vote-buttons>
                 @else
                     @php
                         $isUpvoted=false;
-                        $user=auth()->user();
-                        if($user->votes->where("post_id","=",$post->id)->where("upvote","=",true)->first() !=null)
-                            $isUpvoted=true;
+                        $isDownvoted=false;
+                        $vote=auth()->user()->votes->where("post_id","=",$post->id)->first();
+                        if($vote !=null)
+                            if($vote->upvote == true)
+                                $isUpvoted=true;
+                            else if($vote->downvote==true)
+                                $isDownvoted=true;
                     @endphp
-                    <vote-buttons post-id="{{$post->id}}" is-upvoted="{{$isUpvoted}}"></vote-buttons>
+                    <vote-buttons post-id="{{$post->id}}" is-upvoted="{{$isUpvoted}}" is-downvoted="{{$isDownvoted}}" rating={{$post->rating}}></vote-buttons>
                 @endguest
                 
             </div>

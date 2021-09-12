@@ -39,6 +39,7 @@ class PostsController extends Controller
             'description'=>$data['description'],
             'sub_reddit_id'=>$data['sub_reddit_id'],
             'image'=>$imagePath,
+            'rating'=>0,
         ]);
 
         return redirect("home");

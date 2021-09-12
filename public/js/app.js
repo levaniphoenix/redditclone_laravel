@@ -1901,19 +1901,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['postId', 'isUpvoted', 'isDownvoted'],
+  props: ['postId', 'isUpvoted', 'isDownvoted', 'rating'],
   mounted: function mounted() {},
   data: function data() {
     return {
       statusIsUpvoted: this.isUpvoted,
-      statusIsDownvoted: this.isDownvoted
+      statusIsDownvoted: this.isDownvoted,
+      displayRating: this.rating
     };
   },
   methods: {
     upvote: function upvote() {
+      if (this.statusIsDownvoted == false && this.statusIsUpvoted == false) this.displayRating = parseInt(this.displayRating) + 1;else if (this.statusIsUpvoted == false && this.statusIsDownvoted == true) this.displayRating = parseInt(this.displayRating) + 2;else if (this.statusIsDownvoted == false && this.statusIsUpvoted == true) this.displayRating = parseInt(this.displayRating) - 1;
       this.statusIsUpvoted = !this.statusIsUpvoted;
       this.statusIsDownvoted = false;
-      axios.post("/upvote/" + this.postId).then(function (res) {//this.status= !this.status;
+      axios.post("/upvote/" + this.postId).then(function (res) {//console.log(res.data);
       })["catch"](function (errors) {
         if (errors.response.status == 401) {
           window.location = '/login';
@@ -1921,9 +1923,10 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     downvote: function downvote() {
+      if (this.statusIsDownvoted == false && this.statusIsUpvoted == false) this.displayRating = parseInt(this.displayRating) - 1;else if (this.statusIsUpvoted == true && this.statusIsDownvoted == false) this.displayRating = parseInt(this.displayRating) - 2;else if (this.statusIsDownvoted == true && this.statusIsUpvoted == false) this.displayRating = parseInt(this.displayRating) + 1;
       this.statusIsDownvoted = !this.statusIsDownvoted;
       this.statusIsUpvoted = false;
-      axios.post("/downvote/" + this.postId).then(function (res) {//console.log(res.data);
+      axios.post("/downvote/" + this.postId).then(function (res) {//console.log(this.rating);
       })["catch"](function (errors) {
         if (errors.response.status == 401) {
           window.location = '/login';
@@ -37618,7 +37621,7 @@ var render = function() {
         staticClass: "align-text-bottom mb-0 mr-2",
         staticStyle: { "text-align": "center" }
       },
-      [_vm._v("15k")]
+      [_vm._v(_vm._s(this.displayRating))]
     ),
     _vm._v(" "),
     _c(

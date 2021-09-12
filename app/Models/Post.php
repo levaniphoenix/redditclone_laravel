@@ -14,6 +14,7 @@ class Post extends Model
         'description',
         'image',
         'sub_reddit_id',
+        'rating',
     ];
 
     protected $dates = [
