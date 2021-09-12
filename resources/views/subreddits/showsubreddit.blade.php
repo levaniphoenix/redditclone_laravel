@@ -36,7 +36,7 @@
                     @php
                         $isUpvoted=false;
                         $isDownvoted=false;
-                        $vote=auth()->user()->votes->where("post_id","=",$post->id)->first();
+                        $vote=auth()->user()->votes->where("post_id","=",$post->id)->where("user_id","=",auth()->user()->id)->first();
                         if($vote !=null)
                             if($vote->upvote == true)
                                 $isUpvoted=true;

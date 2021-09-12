@@ -19,11 +19,8 @@ class SubredditController extends Controller
 
         //$posts=Post::where('sub_reddit_id','=',$subReddit->id)->get();
 
-        $posts=DB::table('posts')
-                    ->where('sub_reddit_id','=',$subReddit->id)
-                    ->join('users', 'user_id', '=', 'users.id')
-                    ->get();
-        //dd($posts);
+        $posts=DB::select('select posts.*, users.name from posts join users ON posts.user_id=users.id where posts.sub_reddit_id='. $subReddit->id);
+                    
 
         $isJoined=(auth()->user()) ? auth()->user()->joinedSubreddits->contains($subReddit->id) : false;
 
