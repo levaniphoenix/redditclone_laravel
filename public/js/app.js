@@ -1881,6 +1881,68 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/VoteButtons.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/VoteButtons.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ['postId', 'isUpvoted', 'isDownvoted'],
+  mounted: function mounted() {},
+  data: function data() {
+    return {
+      statusIsUpvoted: this.isUpvoted,
+      statusIsDownvoted: this.isDownvoted
+    };
+  },
+  methods: {
+    upvote: function upvote() {
+      this.statusIsUpvoted = !this.statusIsUpvoted;
+      this.statusIsDownvoted = false;
+      axios.post("/upvote/" + this.postId).then(function (res) {//this.status= !this.status;
+      })["catch"](function (errors) {
+        if (errors.response.status == 401) {
+          window.location = '/login';
+        }
+      });
+    },
+    downvote: function downvote() {
+      this.statusIsDownvoted = !this.statusIsDownvoted;
+      this.statusIsUpvoted = false;
+      axios.post("/downvote/" + this.postId).then(function (res) {//console.log(res.data);
+      })["catch"](function (errors) {
+        if (errors.response.status == 401) {
+          window.location = '/login';
+        }
+      });
+    }
+  },
+  computed: {
+    upvoteColor: function upvoteColor() {
+      return this.statusIsUpvoted ? "color: #FF8B60;" : "color: #000;";
+    },
+    downvoteColor: function downvoteColor() {
+      return this.statusIsDownvoted ? "color: #9494FF;" : "color: #000;";
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -1906,6 +1968,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js"
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('join-button', __webpack_require__(/*! ./components/JoinButton.vue */ "./resources/js/components/JoinButton.vue")["default"]);
+Vue.component('vote-buttons', __webpack_require__(/*! ./components/VoteButtons.vue */ "./resources/js/components/VoteButtons.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -37384,6 +37447,45 @@ component.options.__file = "resources/js/components/JoinButton.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/VoteButtons.vue":
+/*!*************************************************!*\
+  !*** ./resources/js/components/VoteButtons.vue ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _VoteButtons_vue_vue_type_template_id_5cf4509c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./VoteButtons.vue?vue&type=template&id=5cf4509c& */ "./resources/js/components/VoteButtons.vue?vue&type=template&id=5cf4509c&");
+/* harmony import */ var _VoteButtons_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./VoteButtons.vue?vue&type=script&lang=js& */ "./resources/js/components/VoteButtons.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _VoteButtons_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _VoteButtons_vue_vue_type_template_id_5cf4509c___WEBPACK_IMPORTED_MODULE_0__.render,
+  _VoteButtons_vue_vue_type_template_id_5cf4509c___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/VoteButtons.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/JoinButton.vue?vue&type=script&lang=js&":
 /*!*************************************************************************!*\
   !*** ./resources/js/components/JoinButton.vue?vue&type=script&lang=js& ***!
@@ -37400,6 +37502,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/VoteButtons.vue?vue&type=script&lang=js&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/VoteButtons.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VoteButtons_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./VoteButtons.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/VoteButtons.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VoteButtons_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/JoinButton.vue?vue&type=template&id=2a99b7a7&":
 /*!*******************************************************************************!*\
   !*** ./resources/js/components/JoinButton.vue?vue&type=template&id=2a99b7a7& ***!
@@ -37413,6 +37531,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_JoinButton_vue_vue_type_template_id_2a99b7a7___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_JoinButton_vue_vue_type_template_id_2a99b7a7___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./JoinButton.vue?vue&type=template&id=2a99b7a7& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/JoinButton.vue?vue&type=template&id=2a99b7a7&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/VoteButtons.vue?vue&type=template&id=5cf4509c&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/VoteButtons.vue?vue&type=template&id=5cf4509c& ***!
+  \********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VoteButtons_vue_vue_type_template_id_5cf4509c___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VoteButtons_vue_vue_type_template_id_5cf4509c___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VoteButtons_vue_vue_type_template_id_5cf4509c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./VoteButtons.vue?vue&type=template&id=5cf4509c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/VoteButtons.vue?vue&type=template&id=5cf4509c&");
 
 
 /***/ }),
@@ -37445,6 +37580,56 @@ var render = function() {
       domProps: { textContent: _vm._s(_vm.buttonText) },
       on: { click: _vm.joinSubreddit }
     })
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/VoteButtons.vue?vue&type=template&id=5cf4509c&":
+/*!***********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/VoteButtons.vue?vue&type=template&id=5cf4509c& ***!
+  \***********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "button",
+      { staticClass: "btn", style: _vm.upvoteColor, on: { click: _vm.upvote } },
+      [_c("i", { staticClass: "fas fa-arrow-up" })]
+    ),
+    _vm._v(" "),
+    _c(
+      "p",
+      {
+        staticClass: "align-text-bottom mb-0 mr-2",
+        staticStyle: { "text-align": "center" }
+      },
+      [_vm._v("15k")]
+    ),
+    _vm._v(" "),
+    _c(
+      "button",
+      {
+        staticClass: "btn mr-2",
+        style: _vm.downvoteColor,
+        on: { click: _vm.downvote }
+      },
+      [_c("i", { staticClass: "fas fa-arrow-down" })]
+    )
   ])
 }
 var staticRenderFns = []

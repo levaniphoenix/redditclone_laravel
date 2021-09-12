@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\DB;
 use App\Models\SubReddit;
 use App\Models\Post;
+use App\Models\User;
 
 
 class SubredditController extends Controller
@@ -15,8 +17,12 @@ class SubredditController extends Controller
     {
         $subReddit=SubReddit::where("name",'=', $name )->firstOrFail();
 
-        $posts=Post::where('sub_reddit_id','=',$subReddit->id)->get();
+        //$posts=Post::where('sub_reddit_id','=',$subReddit->id)->get();
 
+        $posts=DB::table('posts')
+                    ->where('sub_reddit_id','=',$subReddit->id)
+                    ->join('users', 'user_id', '=', 'users.id')
+                    ->get();
         //dd($posts);
 
         $isJoined=(auth()->user()) ? auth()->user()->joinedSubreddits->contains($subReddit->id) : false;

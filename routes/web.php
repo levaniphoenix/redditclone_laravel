@@ -21,6 +21,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::post('/upvote/{postId}',[App\Http\Controllers\VotesController::class, 'storeUpvote']);
+Route::post('/downvote/{postId}',[App\Http\Controllers\VotesController::class, 'storeDownvote']);
+
 Route::post('/join/{subReddit}',[App\Http\Controllers\JoinsController::class, 'store']);
 
 Route::post('/post',[App\Http\Controllers\PostsController::class, 'store']);

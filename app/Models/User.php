@@ -56,4 +56,10 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(SubReddit::class);
     }
+
+    public function votes()
+    {
+        return $this->hasMany(Vote::class);
+    }
+
 }

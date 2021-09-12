@@ -30,16 +30,23 @@
             
         <div class="d-flex pt-4 container">
             <div>
-                <button class="btn mr-2"> <i class="fas fa-arrow-up"></i></button>
-                <p class="align-text-bottom mb-0 mr-2" style="text-align: center;">15k</p>
-                <button class="btn mr-2"><i class="fas fa-arrow-down"></i></button>
+                @guest
+                    <vote-buttons post-id="{{$post->id}}" is-upvoted=""></vote-buttons>
+                @else
+                    @php
+                        $isUpvoted=false;
+                        $user=auth()->user();
+                        if($user->votes->where("post_id","=",$post->id)->where("upvote","=",true)->first() !=null)
+                            $isUpvoted=true;
+                    @endphp
+                    <vote-buttons post-id="{{$post->id}}" is-upvoted="{{$isUpvoted}}"></vote-buttons>
+                @endguest
+                
             </div>
             <div id="post_title">
                 <img class="rounded-circle pr-2" style="height: 25px;" src="https://i.redd.it/9n242vp9u7r31.png">
-                @php
-                    $user=APP\Models\User::find($post->user_id);   
-                @endphp
-                <p class=" d-inline">posted by u/{{$user->name}} {{$post->created_at->diffForHumans()}} </p>
+                
+                <p class=" d-inline">posted by u/{{$post->name}} {{\Carbon\Carbon::parse($post->created_at)->diffForHumans()}} </p>
                 <div>
                     <h1 class="medium-text"> {{$post->title}} </h1>
                 </div>

@@ -11,9 +11,7 @@
     
     <div class="d-flex pt-4">
         <div>
-            <button class="btn"> <i class="fas fa-arrow-up"></i></button>
-            <p class="align-text-bottom mb-0" style="text-align: center;">15k</p>
-            <button class="btn"><i class="fas fa-arrow-down"></i></button>
+            <vote-buttons></vote-buttons>
         </div>
         <div id="post_title">
             <img class="rounded-circle pr-2" style="height: 25px;" src="https://i.redd.it/9n242vp9u7r31.png">
@@ -46,9 +44,22 @@
 
     <div class="d-flex pt-4">
         <div>
-            <button class="btn mr-2"> <i class="fas fa-arrow-up"></i></button>
-            <p class="align-text-bottom mb-0 mr-2" style="text-align: center;">15k</p>
-            <button class="btn mr-2"><i class="fas fa-arrow-down"></i></button>
+            @guest
+                <vote-buttons post-id="{{$post->id}}" is-upvoted=""></vote-buttons>
+            @else
+                @php
+                    $isUpvoted=false;
+                    $isDownvoted=false;
+                    $vote=auth()->user()->votes->where("post_id","=",$post->id)->first();
+                    if($vote !=null)
+                        if($vote->upvote == true)
+                            $isUpvoted=true;
+                        else if($vote->downvote==true)
+                            $isDownvoted=true;
+                @endphp
+                <vote-buttons post-id="{{$post->id}}" is-upvoted="{{$isUpvoted}}" is-downvoted="{{$isDownvoted}}"></vote-buttons>
+            @endguest
+            
         </div>
         <div id="post_title">
             <img class="rounded-circle pr-2" style="height: 25px;" src="https://i.redd.it/9n242vp9u7r31.png">
