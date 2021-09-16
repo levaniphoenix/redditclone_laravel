@@ -21,7 +21,8 @@
         @endguest
         
     </div>
-    <div id="post_title">
+    <div id="post">
+        
         <img class="rounded-circle pr-2" style="height: 25px;" src="https://i.redd.it/9n242vp9u7r31.png">
         <h1 style="font-size:small" class="text-bold pt-1 d-inline">
             @if(App\Models\SubReddit::where("id","=",$post->sub_reddit_id)->first()==null)
@@ -35,8 +36,9 @@
         <div>
             <h1 class="medium-text">{{ $post->title }}</h1>
         </div>
+        
         @if( $post->image !=null)
-            <img class="w-100" src="{{ Storage::url($post->image) }}" style="max-height: 700px">
+            <img class="w-100 pb-3" src="{{ Storage::url($post->image) }}" style="max-height: 700px">
         @endif
     </div>
 </div>

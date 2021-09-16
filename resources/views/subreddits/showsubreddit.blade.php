@@ -28,7 +28,7 @@
 
         @foreach($posts as $post)
             
-        <div class="d-flex pt-4 container" style="background: #fff">
+        <div class="d-flex pt-4 container my-3" style="background: #fff">
             <div>
                 @guest
                     <vote-buttons post-id="{{$post->id}}" is-upvoted="" rating={{$post->rating}}></vote-buttons>
@@ -55,7 +55,7 @@
                     <a style="color: inherit;" href="{{route('post.show',['post' => $post->id ])}}"> <h1 class="medium-text">{{ $post->title }}</h1> </a>
                 </div>
                 @if($post->image !=null)
-                    <img class="w-100" src="{{ Storage::url($post->image) }}" style="max-height: 700px">
+                    <img class="w-100 mb-4" src="{{ Storage::url($post->image) }}" style="max-height: 700px">
                 @endif
             </div>
         </div>
