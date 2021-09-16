@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PostsController extends Controller
 {
@@ -18,6 +19,16 @@ class PostsController extends Controller
 
         return view("posts/createpost",[
             'user'=>$user,
+        ]);
+    }
+
+    public function show(Post $post)
+    {
+        $userName=DB::select('select users.name from users where users.id = '. $post->user_id);
+        
+        return view("posts/showpost",[
+            'post'=>$post,
+            'poster'=>$userName[0],
         ]);
     }
 

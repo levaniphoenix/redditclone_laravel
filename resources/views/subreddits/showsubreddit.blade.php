@@ -21,14 +21,14 @@
             </div>
         </div>
         
-        <div class="container pt-2" id="create_post">
+        <div class="container pt-2 mb-2 rounded" id="create_post" style="background: #fff">
             <img class="rounded-circle pr-2" style="height: 50px;" src="https://i.redd.it/9n242vp9u7r31.png">
             <a href="/post/create"> <input type="text" placeholder="Create Post" ></a>
         </div>
 
         @foreach($posts as $post)
             
-        <div class="d-flex pt-4 container">
+        <div class="d-flex pt-4 container" style="background: #fff">
             <div>
                 @guest
                     <vote-buttons post-id="{{$post->id}}" is-upvoted="" rating={{$post->rating}}></vote-buttons>
@@ -52,7 +52,7 @@
                 
                 <p class=" d-inline">posted by u/{{$post->name}} {{\Carbon\Carbon::parse($post->created_at)->diffForHumans()}} </p>
                 <div>
-                    <h1 class="medium-text"> {{$post->title}} </h1>
+                    <a style="color: inherit;" href="{{route('post.show',['post' => $post->id ])}}"> <h1 class="medium-text">{{ $post->title }}</h1> </a>
                 </div>
                 @if($post->image !=null)
                     <img class="w-100" src="{{ Storage::url($post->image) }}" style="max-height: 700px">
