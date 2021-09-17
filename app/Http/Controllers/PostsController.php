@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -10,7 +11,7 @@ class PostsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth',['except' => ['index','show']]);
     }
 
     public function create()
@@ -18,6 +19,14 @@ class PostsController extends Controller
         $user=auth()->user();
 
         return view("posts/createpost",[
+            'user'=>$user,
+        ]);
+    }
+
+    public function index(User $user)
+    {
+        
+        return view('users/userposts',[
             'user'=>$user,
         ]);
     }

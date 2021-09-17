@@ -8,7 +8,7 @@
         <a href="/post/create"> <input type="text" placeholder="Create Post" ></a>
     </div>
     
-    @foreach ($posts as $post)
+    @foreach ($user->posts as $post)
 
     <div class="d-flex pt-4 my-3" style="background: #fff">
         <div>
@@ -31,18 +31,18 @@
         </div>
         <div id="post_title">
             <img class="rounded-circle pr-2" style="height: 25px;" src="https://i.redd.it/9n242vp9u7r31.png">
-            <h1 style="font-size:small" class="text-bold pt-1 d-inline">
+            <h1 style="font-size:small; font-weight: bold;" class="pt-1 d-inline">
                 @php
                     $subReddit=App\Models\SubReddit::where("id","=",$post->sub_reddit_id)->first();
                 @endphp
                 @if($subReddit==null)
-                    u/{{$post->name}}
+                    u/{{$user->name}}
                 @else
-                   <a style="color: inherit; font-weight: bold;" href="{{route('reddit.show',['name' => $subReddit->name ])}}"> r/{{$subReddit->name}} </a> <i class="fas fa-circle" style="font-size: 3px; vertical-align: middle;"></i>
+                   <a style="color: inherit;" href="{{route('reddit.show',['name' => $subReddit->name ])}}"> r/{{$subReddit->name}} </a> <i class="fas fa-circle" style="font-size: 3px; vertical-align: middle;"></i>
                 @endif
             </h1>
             
-            <p class="d-inline">posted by u/{{$post->name}} {{\Carbon\Carbon::parse($post->created_at)->diffForHumans()}} </p>
+            <p class="d-inline">posted by u/{{$user->name}} {{ $post->created_at->diffForHumans()}} </p>
             <div>
                 <a style="color: inherit;" href="{{route('post.show',['post' => $post->id ])}}"> <h1 class="medium-text">{{ $post->title }}</h1> </a>
             </div>

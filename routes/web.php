@@ -29,6 +29,7 @@ Route::post('/join/{subReddit}',[App\Http\Controllers\JoinsController::class, 's
 Route::post('/post',[App\Http\Controllers\PostsController::class, 'store']);
 Route::get('/post/create',[App\Http\Controllers\PostsController::class, 'create']);
 Route::get('/post/{post}',[App\Http\Controllers\PostsController::class, 'show'])->name('post.show');
+Route::get('/user/{user}',[App\Http\Controllers\PostsController::class, 'index'])->name('user.index');
 
 Route::post('/subreddit',[App\Http\Controllers\SubredditController::class, 'store']);
 Route::get('/r/{name}',[App\Http\Controllers\SubredditController::class, 'show'])->name('reddit.show');

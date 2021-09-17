@@ -3,29 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index()
     {
-        $user=auth()->user();
+        $posts=DB::select('select posts.*, users.name from posts join users ON posts.user_id=users.id where posts.user_id=users.id order by rating DESC');
+        //dd($posts);
         return view('home',[
-            'user'=>$user,
+            'posts'=>$posts,
         ]);
     }
+
 }

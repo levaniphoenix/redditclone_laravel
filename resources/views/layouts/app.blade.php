@@ -41,12 +41,21 @@
                             <a class="btn  dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               Your Communities
                             </a>
-                          
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                              @foreach (auth()->user()->joinedSubreddits as $subReddit)
-                                <a class="dropdown-item" href="{{route('reddit.show',['name' => $subReddit->name ])}}"> {{$subReddit->name}} </a>
-                              @endforeach
-                            </div>
+                            @php
+                                $joinedSubreddits=auth()->user()->joinedSubreddits;
+                            @endphp
+                            @if($joinedSubreddits->first()==null)
+                                <div class="dropdown-menu px-2" aria-labelledby="dropdownMenuLink">
+                                    <span>No Communities to show</span>
+                                </div>
+                            @else
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    @foreach ($joinedSubreddits as $subReddit)
+                                        <a class="dropdown-item" href="{{route('reddit.show',['name' => $subReddit->name ])}}"> {{$subReddit->name}} </a>
+                                    @endforeach 
+                                </div>
+                            @endif
+                            
                           </div>
                           @endguest
  
