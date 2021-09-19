@@ -24,7 +24,7 @@
         <div class="d-flex" >
             <div class="w-50">
                 <h1>Reddit</h1>
-                <p style="font-size: 2em;">Welcome to Reddit, your place to connect with others and share dank memes.</p>
+                <p style="font-size: 2em;">Welcome to Reddit, your place to connect with others and share memes.</p>
             </div>
                 
             <div class="w-75 offset-1">
