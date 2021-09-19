@@ -33,7 +33,7 @@ class SubredditController extends Controller
 
     public function create()
     {
-        return view("subreddits\createsubreddit.blade.php");
+        return view("subreddits\createsubreddit");
     }
 
     public function store()
