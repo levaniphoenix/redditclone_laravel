@@ -24,7 +24,7 @@ class SubredditController extends Controller
 
         $isJoined=(auth()->user()) ? auth()->user()->joinedSubreddits->contains($subReddit->id) : false;
 
-        return view("subreddits\showsubreddit",[
+        return view("showsubreddit",[
             'subreddit'=>$subReddit,
             'isJoined'=>$isJoined,
             'posts'=>$posts,
@@ -33,7 +33,7 @@ class SubredditController extends Controller
 
     public function create()
     {
-        return view("subreddits\createsubreddit");
+        return view("createsubreddit");
     }
 
     public function store()
