@@ -50,7 +50,7 @@ class PostsController extends Controller
             'image'=>'image'
         ]);
         if(request('image')!=null)
-            $imagePath=request('image')->store('uploads','public');
+            $imagePath=request('image')->store('public');
         else
             $imagePath=null;        
         //dd($data);
