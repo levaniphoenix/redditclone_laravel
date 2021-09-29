@@ -17,14 +17,13 @@ class SubredditController extends Controller
     {
         $subReddit=SubReddit::where("name",'=', $name )->firstOrFail();
 
-        //$posts=Post::where('sub_reddit_id','=',$subReddit->id)->get();
+        $posts=Post::with('user')->get();
 
-        $posts=DB::select('select posts.*, users.name from posts join users ON posts.user_id=users.id where posts.sub_reddit_id='. $subReddit->id);
-                    
+        //$posts=DB::select('select posts.*, users.name from posts join users ON posts.user_id=users.id where posts.sub_reddit_id='. $subReddit->id);
 
         $isJoined=(auth()->user()) ? auth()->user()->joinedSubreddits->contains($subReddit->id) : false;
 
-        return view("showsubreddit",[
+        return view("subreddits/showsubreddit",[
             'subreddit'=>$subReddit,
             'isJoined'=>$isJoined,
             'posts'=>$posts,
@@ -33,7 +32,7 @@ class SubredditController extends Controller
 
     public function create()
     {
-        return view("createsubreddit");
+        return view("subreddits/createsubreddit");
     }
 
     public function store()

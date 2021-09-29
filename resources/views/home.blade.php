@@ -36,13 +36,13 @@
                     $subReddit=App\Models\SubReddit::where("id","=",$post->sub_reddit_id)->first();
                 @endphp
                 @if($subReddit==null)
-                    u/{{$post->name}}
+                    u/{{$post->user->name}}
                 @else
                    <a style="color: inherit; font-weight: bold;" href="{{route('reddit.show',['name' => $subReddit->name ])}}"> r/{{$subReddit->name}} </a> <i class="fas fa-circle" style="font-size: 3px; vertical-align: middle;"></i>
                 @endif
             </h1>
             
-            <p class="d-inline">posted by u/{{$post->name}} {{\Carbon\Carbon::parse($post->created_at)->diffForHumans()}} </p>
+            <p class="d-inline">posted by u/{{$post->user->name}} {{\Carbon\Carbon::parse($post->created_at)->diffForHumans()}} </p>
             <div>
                 <a style="color: inherit;" href="{{route('post.show',['post' => $post->id ])}}"> <h1 class="medium-text">{{ $post->title }}</h1> </a>
             </div>

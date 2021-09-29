@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
-<!--   <p> {{$subreddit}} </p> -->
     <a href="/r/{{$subreddit->name}}">
         <div style="background: rgb(45, 151, 229); height: 64px;">
         </div>
@@ -50,7 +48,7 @@
             <div id="post_title">
                 <img class="rounded-circle pr-2" style="height: 25px;" src="https://i.redd.it/9n242vp9u7r31.png">
                 
-                <p class=" d-inline">posted by u/{{$post->name}} {{\Carbon\Carbon::parse($post->created_at)->diffForHumans()}} </p>
+                <p class=" d-inline">posted by u/{{$post->user->name}} {{\Carbon\Carbon::parse($post->created_at)->diffForHumans()}} </p>
                 <div>
                     <a style="color: inherit;" href="{{route('post.show',['post' => $post->id ])}}"> <h1 class="medium-text">{{ $post->title }}</h1> </a>
                 </div>
